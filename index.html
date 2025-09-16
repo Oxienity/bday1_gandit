@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Happy Birthday 🎉</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #0d1b2a; /* langit malam */
+      font-family: 'Poppins', sans-serif;
+      overflow: hidden;
+      perspective: 1200px;
+    }
+
+    /* Stars background */
+    .stars, .stars2, .stars3, .starsLeft, .starsRight {
+      position: absolute;
+      background: transparent;
+      border-radius: 50%;
+    }
+
+    .stars {
+      width: 2px;
+      height: 2px;
+      box-shadow: 
+        50px 100px white,
+        150px 200px white,
+        300px 80px white,
+        400px 150px white,
+        600px 300px white,
+        700px 120px white,
+        900px 250px white,
+        1100px 100px white,
+        1200px 200px white;
+      animation: twinkle 2s infinite alternate;
+    }
+
+    .stars2 {
+      width: 3px;
+      height: 3px;
+      box-shadow: 
+        80px 50px white,
+        200px 180px white,
+        350px 220px white,
+        500px 90px white,
+        650px 200px white,
+        800px 280px white,
+        1000px 160px white,
+        1150px 300px white,
+        1250px 80px white;
+      animation: twinkle 3s infinite alternate;
+    }
+
+    .stars3 {
+      width: 1px;
+      height: 1px;
+      box-shadow: 
+        40px 250px white,
+        140px 320px white,
+        280px 180px white,
+        420px 300px white,
+        560px 100px white,
+        720px 260px white,
+        950px 320px white,
+        1080px 220px white,
+        1280px 150px white;
+      animation: twinkle 4s infinite alternate;
+    }
+
+    /* Stars khusus sisi kiri */
+    .starsLeft {
+      width: 2px;
+      height: 2px;
+      box-shadow: 
+        20px 50px white,
+        40px 120px white,
+        60px 200px white,
+        80px 300px white,
+        100px 400px white,
+        30px 180px white,
+        70px 250px white,
+        90px 350px white,
+        50px 450px white,
+        110px 500px white,
+        60px 600px white,
+        40px 700px white,
+        100px 750px white;
+      animation: twinkle 3s infinite alternate;
+    }
+
+    /* Stars khusus sisi kanan */
+    .starsRight {
+      width: 2px;
+      height: 2px;
+      box-shadow: 
+        1180px 60px white,
+        1200px 140px white,
+        1220px 220px white,
+        1240px 300px white,
+        1260px 380px white,
+        1280px 460px white,
+        1190px 540px white,
+        1210px 620px white,
+        1230px 700px white,
+        1250px 780px white;
+      animation: twinkle 3s infinite alternate;
+    }
+
+    @keyframes twinkle {
+      from { opacity: 0.2; }
+      to { opacity: 1; }
+    }
+
+    /* Moon */
+    .moon {
+      position: absolute;
+      top: 50px;
+      right: 80px;
+      width: 100px;
+      height: 100px;
+      background: radial-gradient(circle at 30% 30%, #fff9c4, #fdd835);
+      border-radius: 50%;
+      box-shadow: 0 0 30px rgba(255, 255, 200, 0.8);
+    }
+
+    .card {
+      background: rgba(255,255,255,0.15);
+      padding: 30px;
+      border-radius: 20px;
+      text-align: center;
+      box-shadow: 0 8px 25px rgba(0,0,0,0.6);
+      position: relative;
+      z-index: 2;
+      backdrop-filter: blur(12px);
+      max-width: 600px;
+    }
+    h1 {
+      font-size: 2.2rem;
+      color: #ffce54;
+      margin: 10px 0;
+      text-shadow: 2px 2px 5px rgba(0,0,0,0.6);
+    }
+    p {
+      font-size: 1rem;
+      color: #fff;
+      margin-bottom: 15px;
+    }
+
+    /* Intro typing text */
+    .intro {
+      display: inline-block;
+      color: #fff;
+      font-size: 1.5rem;
+      font-weight: bold;
+      white-space: nowrap;
+      border-right: 3px solid #ffce54;
+      width: 0;
+      overflow: hidden;
+      animation: typing 4s steps(40, end) forwards, blink 0.7s step-end infinite;
+      margin-bottom: 20px;
+      padding: 8px 15px;
+      background: rgba(0,0,0,0.5);
+      border-radius: 8px;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.7);
+    }
+    .intro.hide {
+      animation: fadeout 1.5s forwards;
+    }
+    @keyframes typing {
+      from { width: 0 }
+      to { width: 100% }
+    }
+    @keyframes blink {
+      50% { border-color: transparent }
+    }
+    @keyframes fadeout {
+      to { opacity: 0; height: 0; margin: 0 }
+    }
+
+    /* Paper wrapper */
+    .photos {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 15px;
+      margin-bottom: 20px;
+    }
+    .paper {
+      width: 100%;
+      height: 180px;
+      perspective: 1000px;
+    }
+    .page {
+      width: 100%;
+      height: 100%;
+      position: relative;
+      transform-style: preserve-3d;
+      transition: transform 1s ease;
+    }
+    .page.open {
+      transform: rotateY(-180deg);
+    }
+    .front, .back {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      backface-visibility: hidden;
+      border-radius: 15px;
+      overflow: hidden;
+      border: 3px solid #ffce54;
+    }
+    .front {
+      background: linear-gradient(135deg, #ffce54, #ffdd88);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      font-size: 1rem;
+      color: #222;
+    }
+    .back {
+      transform: rotateY(180deg);
+    }
+    .back img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    button {
+      margin-top: 15px;
+      padding: 12px 25px;
+      font-size: 1rem;
+      border: none;
+      border-radius: 10px;
+      background: #ffce54;
+      color: #222;
+      cursor: pointer;
+      font-weight: bold;
+      transition: 0.3s;
+    }
+    button:hover {
+      background: #e0b94d;
+    }
+
+    /* Confetti */
+    .confetti {
+      position: absolute;
+      width: 10px;
+      height: 10px;
+      background-color: red;
+      top: -10px;
+      animation: fall 4s linear forwards;
+    }
+    @keyframes fall {
+      to {
+        transform: translateY(110vh) rotate(720deg);
+        opacity: 0;
+      }
+    }
+
+    /* Hiasan pinggir */
+    .decoration {
+      position: absolute;
+      width: 80px;
+      opacity: 0.7;
+      animation: float 4s ease-in-out infinite alternate;
+      z-index: 1;
+    }
+    .decoration.left {
+      left: 20px;
+      top: 30%;
+    }
+    .decoration.right {
+      right: 20px;
+      top: 50%;
+    }
+    @keyframes float {
+      from { transform: translateY(0); }
+      to { transform: translateY(-20px); }
+    }
+    #ytplayer {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <!-- Stars and Moon -->
+  <div class="stars"></div>
+  <div class="stars2"></div>
+  <div class="stars3"></div>
+  <div class="starsLeft"></div>
+  <div class="starsRight"></div>
+  <div class="moon"></div>
+
+  <img src="https://cdn-icons-png.flaticon.com/512/616/616490.png" class="decoration left" alt="Balon">
+  <img src="https://cdn-icons-png.flaticon.com/512/616/616489.png" class="decoration right" alt="Balon">
+  
+  <div class="card">
+    <div id="introText" class="intro">Teruntuk Sayangnya Akuu 🎉</div>
+    
+    <div class="photos">
+      <div class="paper"><div class="page" id="page1">
+        <div class="front">Klik 🎁</div>
+        <div class="back"><img src="foto 1.jpg" alt="Foto 1"></div>
+      </div></div>
+      <div class="paper"><div class="page" id="page2">
+        <div class="front">Klik 🎁</div>
+        <div class="back"><img src="foto 3.jpg" alt="Foto 2"></div>
+      </div></div>
+      <div class="paper"><div class="page" id="page3">
+        <div class="front">Klik 🎁</div>
+        <div class="back"><img src="foto 4.jpg" alt="Foto 3"></div>
+      </div></div>
+      <div class="paper"><div class="page" id="page4">
+        <div class="front">Klik 🎁</div>
+        <div class="back"><img src="foto 2.jpg" alt="Foto 4"></div>
+      </div></div>
+    </div>
+    
+    <h1>Selamat Ulang Tahun 🎂</h1>
+    <p>"Happy level up day, Ma Lief ❤️. Semoga makin sukses, makin dewasa, makin bersinar dan semoga mimpi-mimpi kita bisa terwujud bareng-bareng."💪❤️</p>
+    <button onclick="playSurprise()">Buka Kejutan 🎁</button>
+  </div>
+
+  <iframe id="ytplayer" width="0" height="0" src="" frameborder="0" allow="autoplay"></iframe>
+
+  <script>
+    function playSurprise() {
+      document.getElementById("ytplayer").src =
+        "https://www.youtube.com/embed/pd6DgbvUqBc?autoplay=1&loop=1&playlist=pd6DgbvUqBc";
+
+      setTimeout(() => {
+        document.getElementById("introText").classList.add("hide");
+      }, 4500);
+
+      setTimeout(() => document.getElementById("page1").classList.add("open"), 500);
+      setTimeout(() => document.getElementById("page2").classList.add("open"), 1000);
+      setTimeout(() => document.getElementById("page3").classList.add("open"), 1500);
+      setTimeout(() => document.getElementById("page4").classList.add("open"), 2000);
+
+      for (let i = 0; i < 120; i++) {
+        let confetti = document.createElement("div");
+        confetti.classList.add("confetti");
+        confetti.style.left = Math.random() * 100 + "vw";
+        confetti.style.backgroundColor = `hsl(${Math.random()*360}, 100%, 50%)`;
+        confetti.style.animationDuration = (2 + Math.random()*3) + "s";
+        document.body.appendChild(confetti);
+        setTimeout(() => confetti.remove(), 5000);
+      }
+
+      document.querySelector('.card').animate([
+        { transform: 'scale(1)' },
+        { transform: 'scale(1.05)' },
+        { transform: 'scale(1)' }
+      ], { duration: 600, iterations: 2 });
+
+      setTimeout(() => {
+        alert("Happy Birthday buat cowok tengilku 🤭❤️. Terima kasih sudah memilih lahir ke dunia dan jadi  bagian dari perjalanan hidupku. Semoga kamu makin kuat, makin sabar menghadapi aku, dan makin sukses jadi kebanggaan keluarga🎂🎁");
+      }, 2500);
+    }
+  </script>
+</body>
+</html>
